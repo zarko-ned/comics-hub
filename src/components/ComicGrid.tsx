@@ -1,5 +1,6 @@
 import useComics from "@/hooks/useComics";
-import { Text } from "@chakra-ui/react";
+import { SimpleGrid, Text } from "@chakra-ui/react";
+import ComicCard from "./ComicCard";
 
 const ComicGrid = () => {
   const { comics, error } = useComics();
@@ -8,23 +9,16 @@ const ComicGrid = () => {
     <>
       <h1>ComicBooks</h1>
       {error && <Text>{error}</Text>}
-      <ul>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} gap={10}>
         {comics.map((comic) => {
-          const imageUrl = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
-
           // Proveri da li je slika placeholder
           if (comic.thumbnail.path.includes("image_not_available")) {
             return null; // Ne prikazuj strip ako nema pravu sliku
           }
 
-          return (
-            <li key={comic.id}>
-              <h2>{comic.title}</h2>
-              <img src={imageUrl} alt={comic.title} width="200" />
-            </li>
-          );
+          return <ComicCard key={comic.id} comic={comic} />;
         })}
-      </ul>
+      </SimpleGrid>
     </>
   );
 };

@@ -2,10 +2,12 @@ import apiClient from "@/services/api-client";
 import { CanceledError } from "axios";
 import { useEffect, useState } from "react";
 
-interface Comic {
+export interface Comic {
   id: number;
   title: string;
   thumbnail: { path: string; extension: string };
+  pageCount: number;
+
 }
 
 interface FetchComicsResponse {
