@@ -7,7 +7,6 @@ export interface Comic {
   title: string;
   thumbnail: { path: string; extension: string };
   pageCount: number;
-
 }
 
 interface FetchComicsResponse {
@@ -19,22 +18,29 @@ interface FetchComicsResponse {
 const useComics = () => {
   const [comics, setComics] = useState<Comic[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
 
+    setLoading(true);
+
     apiClient
       .get<FetchComicsResponse>("/comics", { signal: controller.signal })
-      .then((res) => setComics(res.data.data.results))
+      .then((res) => {
+        setComics(res.data.data.results);
+        setLoading(false);
+      })
       .catch((err) => {
-        if(err instanceof CanceledError) return;
+        if (err instanceof CanceledError) return;
         setError(err.message);
+        setLoading(false);
       });
 
     return () => controller.abort();
   }, []);
 
-  return { comics, error };
+  return { comics, error, isLoading };
 };
 
 export default useComics;

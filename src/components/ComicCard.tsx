@@ -10,7 +10,7 @@ const ComicCard = ({ comic }: Props) => {
   const imageUrl = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
 
   return (
-    <Card.Root maxW="sm" overflow="hidden" borderRadius="md" shadow="lg" position="relative">
+    <Card.Root  maxW="sm" overflow="hidden" borderRadius="md" shadow="lg" position="relative">
       <Image
         src={imageUrl}
         alt={comic.title}
