@@ -4,6 +4,7 @@ import { ColorModeProvider } from "@/components/ui/color-mode";
 import { NavBar } from "./components/ui/NavBar";
 import { ColorModeButton } from "@/components/ui/color-mode";
 import ComicGrid from "./components/ComicGrid";
+import SeriaList from "./components/SeriaList";
 
 function App() {
   return (
@@ -19,8 +20,8 @@ function App() {
             <NavBar />
             <ColorModeButton />
           </GridItem>
-          <GridItem area="aside" bg="gold" display={{ base: "none", lg: "block" }}>
-            Aside
+          <GridItem area="aside"  display={{ base: "none", lg: "block" }}>
+            <SeriaList/>
           </GridItem>
           <GridItem area="main" >
            <ComicGrid/>
