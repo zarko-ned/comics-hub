@@ -3,6 +3,7 @@ import { ChakraProvider, defaultSystem, Grid, GridItem } from "@chakra-ui/react"
 import { ColorModeProvider } from "@/components/ui/color-mode";
 import { NavBar } from "./components/ui/NavBar";
 import { ColorModeButton } from "@/components/ui/color-mode";
+import ComicGrid from "./components/ComicGrid";
 
 function App() {
   return (
@@ -21,8 +22,8 @@ function App() {
           <GridItem area="aside" bg="gold" display={{ base: "none", lg: "block" }}>
             Aside
           </GridItem>
-          <GridItem area="main" bg="dodgerblue">
-            Main
+          <GridItem area="main" >
+           <ComicGrid/>
           </GridItem>
         </Grid>
       </ColorModeProvider>
