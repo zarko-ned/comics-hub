@@ -5,7 +5,7 @@ import ComicCardSkeleton from "./ComicCardSkeleton";
 
 const ComicGrid = () => {
   const { data, error, isLoading } = useComics();
-  const skeletons = [1, 2, 3, 4, 5, 6];
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
     <>
