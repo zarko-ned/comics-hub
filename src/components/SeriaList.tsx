@@ -3,10 +3,10 @@ import useSeries from '@/hooks/useSeries';
 
 
 const SeriaList = () => {
-    const {series} = useSeries();
+    const {data} = useSeries();
   return (
     <ul>
-        {series.map(seria=><li key={seria.id}>{seria.title}</li>)}
+        {data.map(seria=><li key={seria.id}>{seria.title}</li>)}
     </ul>
   )
 }
