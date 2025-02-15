@@ -1,8 +1,18 @@
 import useSeries from "@/hooks/useSeries";
-import { HStack, List, Image, Text } from "@chakra-ui/react";
+import { HStack, List, Image, Text, Spinner } from "@chakra-ui/react";
 
 const SeriaList = () => {
-  const { data } = useSeries();
+  const { data, isLoading, error } = useSeries();
+
+  if (error) return null;
+  if (isLoading)
+    return (
+      <HStack justifyContent="center" alignItems="center" height="10vh">
+        <Spinner size="xl" />
+      </HStack>
+    );
+  
+  
 
   return (
     <List.Root style={{ listStyleType: "none", padding: 0 }}>
