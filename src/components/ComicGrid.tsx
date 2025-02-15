@@ -11,7 +11,7 @@ const ComicGrid = () => {
     <>
       <h1>ComicBooks</h1>
       {error && <Text>{error}</Text>}
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} gap={10}>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} gap={10} paddingRight='10px'>
         {isLoading &&
           skeletons.map((skeleton) => <ComicCardSkeleton key={skeleton} />)}
         {data.map((comic) => {
