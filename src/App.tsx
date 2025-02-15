@@ -31,7 +31,7 @@ function App() {
               <NavBar />
               <ColorModeButton />
             </GridItem>
-            <GridItem area="aside" display={{ base: "none", lg: "block" }}>
+            <GridItem area="aside" paddingX={5} display={{ base: "none", lg: "block" }}>
               <SeriaList />
             </GridItem>
             <GridItem area="main">
