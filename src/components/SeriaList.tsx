@@ -1,7 +1,21 @@
-import useSeries from "@/hooks/useSeries";
-import { HStack, List, Image, Text, Spinner } from "@chakra-ui/react";
+import useSeries, { Seria } from "@/hooks/useSeries";
+import {
+  HStack,
+  List,
+  Image,
+  Text,
+  Spinner,
+  Highlight,
+  Link,
+  Stack,
+  Heading,
+} from "@chakra-ui/react";
 
-const SeriaList = () => {
+interface Props {
+  onSelectSeria: (seria: Seria) => void;
+}
+
+const SeriaList = ({ onSelectSeria }: Props) => {
   const { data, isLoading, error } = useSeries();
 
   if (error) return null;
@@ -11,34 +25,46 @@ const SeriaList = () => {
         <Spinner size="xl" />
       </HStack>
     );
-  
-  
 
   return (
-    <List.Root style={{ listStyleType: "none", padding: 0 }}>
-      {data.map((seria) => {
-        const imageUrl = `${seria.thumbnail.path}.${seria.thumbnail.extension}`;
+    <>
+      <Stack>
+        <Heading size="2xl" letterSpacing="tight">
+          <Highlight query="stripova" styles={{ color: "teal.600" }}>
+            Serije stripova
+          </Highlight>
+        </Heading>
+    
+      </Stack>
 
-        // Proveri da li je slika placeholder
-        if (seria.thumbnail.path.includes("image_not_available")) {
-          return null; // Ne prikazuj strip ako nema pravu sliku
-        }
+      <List.Root style={{ listStyleType: "none", padding: 0 }}>
+        {data.map((seria) => {
+          const imageUrl = `${seria.thumbnail.path}.${seria.thumbnail.extension}`;
 
-        return (
-          <List.Item key={seria.id} paddingY="5px">
-            <HStack>
-              <Image
-                boxSize="32px"
-                borderRadius={8}
-                src={imageUrl}
-                alt={seria.title}
-              />
-              <Text fontSize="lg">{seria.title}</Text>
-            </HStack>
-          </List.Item>
-        );
-      })}
-    </List.Root>
+          // Proveri da li je slika placeholder
+          if (seria.thumbnail.path.includes("image_not_available")) {
+            return null; // Ne prikazuj strip ako nema pravu sliku
+          }
+
+          return (
+            <List.Item key={seria.id} paddingY="5px">
+              <HStack>
+                <Image
+                  boxSize="32px"
+                  borderRadius={8}
+                  src={imageUrl}
+                  alt={seria.title}
+                />
+                <Link onClick={() => onSelectSeria(seria)} fontSize="lg">
+                  {" "}
+                  {seria.title}
+                </Link>
+              </HStack>
+            </List.Item>
+          );
+        })}
+      </List.Root>
+    </>
   );
 };
 

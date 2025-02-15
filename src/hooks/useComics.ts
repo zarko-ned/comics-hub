@@ -1,5 +1,5 @@
-
 import useData from "./useData";
+import { Seria } from "./useSeries";
 
 export interface Comic {
   id: number;
@@ -8,8 +8,7 @@ export interface Comic {
   pageCount: number;
 }
 
-
-
-const useComics = () => useData<Comic>('/comics');
+const useComics = (selectedSeria: Seria | null) =>
+  useData<Comic>("/comics", { params: { series: selectedSeria?.id } }, [selectedSeria?.id]);
 
 export default useComics;
