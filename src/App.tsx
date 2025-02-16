@@ -39,7 +39,7 @@ const [selectedSeria, setSelectedSeria] = useState<Seria | null>(null);
               <ColorModeButton />
             </GridItem>
             <GridItem area="aside" paddingX={5} display={{ base: "none", lg: "block" }}>
-              <SeriaList onSelectSeria={(seria)=>setSelectedSeria(seria)} />
+              <SeriaList selectedSeria={selectedSeria} onSelectSeria={(seria)=>setSelectedSeria(seria)} />
             </GridItem>
             <GridItem area="main">
               <ComicGrid  selectedSeria={selectedSeria}/>

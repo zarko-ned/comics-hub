@@ -13,9 +13,10 @@ import {
 
 interface Props {
   onSelectSeria: (seria: Seria) => void;
+  selectedSeria: Seria | null;
 }
 
-const SeriaList = ({ onSelectSeria }: Props) => {
+const SeriaList = ({selectedSeria, onSelectSeria }: Props) => {
   const { data, isLoading, error } = useSeries();
 
   if (error) return null;
@@ -55,7 +56,7 @@ const SeriaList = ({ onSelectSeria }: Props) => {
                   src={imageUrl}
                   alt={seria.title}
                 />
-                <Link onClick={() => onSelectSeria(seria)} fontSize="lg">
+                <Link fontWeight={seria.id===selectedSeria?.id? 'bold' : 'normal'} onClick={() => onSelectSeria(seria)} fontSize="lg">
                   {" "}
                   {seria.title}
                 </Link>
