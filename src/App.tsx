@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ChakraProvider, defaultSystem, Grid, GridItem } from "@chakra-ui/react";
+import {
+  ChakraProvider,
+  defaultSystem,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 import { ColorModeProvider, useColorMode } from "@/components/ui/color-mode";
 import { NavBar } from "./components/ui/NavBar";
 import { ColorModeButton } from "@/components/ui/color-mode";
@@ -7,6 +12,7 @@ import ComicGrid from "./components/ComicGrid";
 import SeriaList from "./components/SeriaList";
 import { ThemeProvider } from "next-themes";
 import { Seria } from "./hooks/useSeries";
+import CharacterSelectotr from "./components/CharacterSelectotr";
 
 function App() {
   const { colorMode, setColorMode } = useColorMode();
@@ -18,7 +24,7 @@ function App() {
     }
   }, []); // Prazan niz zavisnosti znači da se useEffect pokreće samo jednom, pri mountu
 
-const [selectedSeria, setSelectedSeria] = useState<Seria | null>(null);
+  const [selectedSeria, setSelectedSeria] = useState<Seria | null>(null);
 
   return (
     <ThemeProvider attribute="class" defaultTheme="dark">
@@ -30,19 +36,32 @@ const [selectedSeria, setSelectedSeria] = useState<Seria | null>(null);
               lg: `"nav nav" "aside main"`,
             }}
             templateColumns={{
-              base: '1fr',
-              lg: '270px 1fr'
+              base: "1fr",
+              lg: "270px 1fr",
             }}
           >
-            <GridItem area="nav" display="flex" justifyContent="space-between" alignItems="center">
+            <GridItem
+              area="nav"
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
               <NavBar />
               <ColorModeButton />
             </GridItem>
-            <GridItem area="aside" paddingX={5} display={{ base: "none", lg: "block" }}>
-              <SeriaList selectedSeria={selectedSeria} onSelectSeria={(seria)=>setSelectedSeria(seria)} />
+            <GridItem
+              area="aside"
+              paddingX={5}
+              display={{ base: "none", lg: "block" }}
+            >
+              <SeriaList
+                selectedSeria={selectedSeria}
+                onSelectSeria={(seria) => setSelectedSeria(seria)}
+              />
             </GridItem>
             <GridItem area="main">
-              <ComicGrid  selectedSeria={selectedSeria}/>
+              <CharacterSelectotr />
+              <ComicGrid selectedSeria={selectedSeria} />
             </GridItem>
           </Grid>
         </ColorModeProvider>
