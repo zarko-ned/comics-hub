@@ -3,13 +3,15 @@ import { SimpleGrid, Text } from "@chakra-ui/react";
 import ComicCard from "./ComicCard";
 import ComicCardSkeleton from "./ComicCardSkeleton";
 import { Seria } from "@/hooks/useSeries";
+import { Character } from "@/hooks/useCharacters";
 
 interface Props{
   selectedSeria: Seria | null;
+  selectedCharacter: Character | null;
 }
 
-const ComicGrid = ({selectedSeria}: Props) => {
-  const { data, error, isLoading } = useComics(selectedSeria);
+const ComicGrid = ({selectedSeria, selectedCharacter}: Props) => {
+  const { data, error, isLoading } = useComics(selectedSeria, selectedCharacter);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (

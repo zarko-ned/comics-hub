@@ -12,7 +12,9 @@ import ComicGrid from "./components/ComicGrid";
 import SeriaList from "./components/SeriaList";
 import { ThemeProvider } from "next-themes";
 import { Seria } from "./hooks/useSeries";
-import CharacterSelectotr from "./components/CharacterSelectotr";
+
+import { Character } from "./hooks/useCharacters";
+import CharacterSelector from "./components/CharacterSelector";
 
 function App() {
   const { colorMode, setColorMode } = useColorMode();
@@ -25,6 +27,7 @@ function App() {
   }, []); // Prazan niz zavisnosti znači da se useEffect pokreće samo jednom, pri mountu
 
   const [selectedSeria, setSelectedSeria] = useState<Seria | null>(null);
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
   return (
     <ThemeProvider attribute="class" defaultTheme="dark">
@@ -60,8 +63,8 @@ function App() {
               />
             </GridItem>
             <GridItem area="main">
-              <CharacterSelectotr />
-              <ComicGrid selectedSeria={selectedSeria} />
+              <CharacterSelector selectedCharacter={selectedCharacter} onSelectCharacter={(character)=>setSelectedCharacter(character)} />
+              <ComicGrid selectedCharacter={selectedCharacter} selectedSeria={selectedSeria} />
             </GridItem>
           </Grid>
         </ColorModeProvider>

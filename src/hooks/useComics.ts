@@ -1,3 +1,4 @@
+import { Character } from "./useCharacters";
 import useData from "./useData";
 import { Seria } from "./useSeries";
 
@@ -8,7 +9,16 @@ export interface Comic {
   pageCount: number;
 }
 
-const useComics = (selectedSeria: Seria | null) =>
-  useData<Comic>("/comics", { params: { series: selectedSeria?.id } }, [selectedSeria?.id]);
-
+const useComics = (
+  selectedSeria: Seria | null,
+  selectedCharacter: Character | null
+) =>
+  useData<Comic>(
+    "/comics",
+    {
+      params: { series: selectedSeria?.id, characters: selectedCharacter?.id },
+    },
+    [selectedSeria?.id, selectedCharacter?.id]
+  );
+ 
 export default useComics;

@@ -1,6 +1,6 @@
 import useData from "./useData";
 
-interface Character {
+export interface Character {
   id: number;
   name: string;
   thumbnail: { path: string; extension: string };

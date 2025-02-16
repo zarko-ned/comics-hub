@@ -2,21 +2,27 @@ import { Button, HStack, Image } from "@chakra-ui/react";
 import {
   MenuContent,
   MenuItem,
-  MenuItemCommand,
   MenuRoot,
   MenuTrigger,
 } from "@/components/ui/menu";
 import { BsChevronDown } from "react-icons/bs";
-import useCharacters from "@/hooks/useCharacters";
+import useCharacters, { Character } from "@/hooks/useCharacters";
 
-const CharacterSelectotr = () => {
-  const { data } = useCharacters();
+interface Props{
+  onSelectCharacter: (character: Character) => void;
+  selectedCharacter: Character | null;
+}
+
+const CharacterSelectotr = ({onSelectCharacter, selectedCharacter}:Props) => {
+  const { data, error } = useCharacters();
+
+  if (error) return null;
   return (
     <MenuRoot>
       <MenuTrigger asChild>
         <Button variant="outline" size="sm">
           <HStack gap="2">
-            Karakteri
+            {selectedCharacter?.name || 'Strip Karakteri'}
             <BsChevronDown />
           </HStack>
         </Button>
@@ -29,7 +35,7 @@ const CharacterSelectotr = () => {
             return null; // Ne prikazuj strip ako nema pravu sliku
           }
           return (
-            <MenuItem
+            <MenuItem onClick={()=>onSelectCharacter(character)}
               key={character.id}
               value={`${character.id}`}
               display="flex"
@@ -37,11 +43,14 @@ const CharacterSelectotr = () => {
               alignItems="center"
             >
               <span>{character.name}</span>
-              <Image boxSize="32px" borderRadius={8} src={imageUrl} alt={character.name} />
+              <Image
+                boxSize="32px"
+                borderRadius={8}
+                src={imageUrl}
+                alt={character.name}
+              />
             </MenuItem>
           );
-          
-         
         })}
       </MenuContent>
     </MenuRoot>
