@@ -13,3 +13,5 @@ export const getChaptersByComicID = async (comicID) => {
     if (error) throw error;
     return data;
 };
+
+
