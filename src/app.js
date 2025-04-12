@@ -2,6 +2,7 @@ import express from 'express';
 import indexRouter from './routes/index.js';
 import comicsRouter from './routes/comics.js';
 import authRouter from './routes/auth.js';
+import customersRouter from './routes/customers.js'
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -14,9 +15,12 @@ const app = express();
 app.use(express.json());
 
 // Rute
+app.use('/login', authRouter); // Auth ruta (/login)
 app.use('/', indexRouter);       // Osnovna ruta (/)
 app.use('/comics', comicsRouter); // Comics ruta (/comics)
-app.use('/login', authRouter); // Auth ruta (/login)
+app.use('/customers', customersRouter); // Customers ruta (/customers)
+
+
 
 // 404 handler
 app.use((req, res) => {
