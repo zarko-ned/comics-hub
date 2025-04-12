@@ -1,5 +1,4 @@
-import {getCustomerByCustomerID} from '../models/customer.js';
-import {saveCustomerChapterProgress} from '../models/customer.js';
+import { getCustomerByCustomerID, saveCustomerChapterProgress, addCustomerChapterToFavourite } from '../models/customer.js';
 
 export const fetchCustomerByCustomerID = async (req, res) => {
     const {customerID} = req.params;
@@ -18,6 +17,18 @@ export const saveChapterProgress = async (req, res) => {
     try {
         await saveCustomerChapterProgress(customerID, chapterID, pageNumber);
         res.json({success: true, message: 'Progress saved successfully'});
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
+
+export const addChapterToFavourite = async (req, res) => {
+    const {chapterID, favourite} = req.body;
+    const customerID = req.user.customer_id; // User je trenutno autentifikovani korisnik
+
+    try {
+        await addCustomerChapterToFavourite(customerID, chapterID, favourite);
+        res.json({success: true, message: 'Favourite status updated successfully'});
     } catch (error) {
         res.status(500).json({error: error.message});
     }

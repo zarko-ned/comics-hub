@@ -51,7 +51,7 @@ export const saveCustomerChapterProgress = async (customerID, chapterID, pageNum
     return data;
 };
 
-export const addChapterToFavourite = async (customerID, chapterID, favourite = 0) => {
+export const addCustomerChapterToFavourite = async (customerID, chapterID, favourite = 0) => {
     const {data, error} = await supabase
         .from('customer_chapter')
         .upsert(
