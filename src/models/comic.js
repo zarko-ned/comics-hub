@@ -3,13 +3,16 @@ import supabase from '../../db.js';  // Putanja zavisi od lokacije
 
 
 
-export const getAllComics = async () => {
-    const { data, error } = await supabase
+export const getAllComics = async (page = 1) => {
+    const pageSize = 20;
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+
+    const { data, count, error } = await supabase
         .from('comic')
-        .select(`
-            *
-        `);
+        .select('*', { count: 'exact' })
+        .range(from, to);
 
     if (error) throw error;
-    return data;
+    return { data, count };
 };
