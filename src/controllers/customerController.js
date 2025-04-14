@@ -1,4 +1,19 @@
-import { getCustomerByCustomerID, saveCustomerChapterProgress, addCustomerChapterToFavourite } from '../models/customer.js';
+import {
+    getCustomerByCustomerID,
+    saveCustomerChapterProgress,
+    addCustomerChapterToFavourite,
+    createCustomer
+} from '../models/customer.js';
+
+export const createNewCustomer = async (req, res) => {
+    const {name, username, password} = req.body;
+    try {
+        const customer = await createCustomer(name, username, password);
+        res.status(201).json({customer});
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
 
 export const fetchCustomerByCustomerID = async (req, res) => {
     const {customerID} = req.params;

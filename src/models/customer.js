@@ -1,4 +1,47 @@
 import supabase from '../../db.js';
+import bcrypt from "bcrypt";
+
+export const createCustomer = async (name, username, password) => {
+
+
+    // Proveri da li već postoji korisnik sa tim korisničkim imenom
+    const { data: existingUser, error: lookupError } = await supabase
+        .from('customer')
+        .select('username')
+        .eq('username', username)
+        .maybeSingle();
+
+    if (lookupError) {
+        throw lookupError;
+    }
+
+    if (existingUser) {
+        throw new Error('Username already exists');
+    }
+
+    // Haširanje lozinke
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    // Kreiraj novog korisnika
+    const newCustomer = {
+        username: username,
+        password: hashedPassword,
+        name: name,
+        status_type_id: 1,
+    };
+
+    const { data, error } = await supabase
+        .from('customer')
+        .insert([newCustomer])
+        .select();
+
+    if (error) {
+        throw new Error('Failed to create customer');
+    }
+
+    return data[0];
+};
+
 
 export const findCustomerByUsername = async (username) => {
     const {data, error} = await supabase
