@@ -3,6 +3,7 @@ import indexRouter from './routes/index.js';
 import comicsRouter from './routes/comics.js';
 import authRouter from './routes/auth.js';
 import customersRouter from './routes/customers.js'
+import chaptersRouter from './routes/chapters.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/login', authRouter); // Auth ruta (/login)
 app.use('/', indexRouter);       // Osnovna ruta (/)
 app.use('/comics', comicsRouter); // Comics ruta (/comics)
+app.use('/chapters', chaptersRouter); // Chapters ruta (/chapters)
 app.use('/customers', customersRouter); // Customers ruta (/customers)
 
 

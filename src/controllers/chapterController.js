@@ -1,4 +1,4 @@
-import { getChaptersByComicID } from '../models/chapter.js';
+import { getChaptersByComicID, getChapterByChapterID } from '../models/chapter.js';
 
 export const fetchChaptersByComicID = async (req, res) => {
     try {
@@ -16,3 +16,18 @@ export const fetchChaptersByComicID = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+export const fetchChapterByID = async (req, res) => {
+    try {
+        const chapterID = req.params.chapterID;
+
+        const chapter = await getChapterByChapterID(chapterID);
+        if (!chapter) {
+            return res.status(404).json({ message: 'Chapter not found' });
+        }
+
+        res.json(chapter);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}

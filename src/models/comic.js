@@ -16,3 +16,5 @@ export const getAllComics = async (page = 1) => {
     if (error) throw error;
     return { data, count };
 };
+
+
