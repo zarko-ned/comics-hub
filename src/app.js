@@ -1,4 +1,7 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from '../swagger.js';
+
 import indexRouter from './routes/index.js';
 import comicsRouter from './routes/comics.js';
 import authRouter from './routes/auth.js';
@@ -14,6 +17,9 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+// Swagger UI ruta
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 // Rute
 app.use('/login', authRouter); // Auth ruta (/login)

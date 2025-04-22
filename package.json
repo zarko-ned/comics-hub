@@ -17,6 +17,8 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "~1.9.1",
     "postgres": "^3.4.5",
-    "pug": "^3.0.3"
+    "pug": "^3.0.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
