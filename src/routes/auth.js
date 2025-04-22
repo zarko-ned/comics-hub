@@ -8,7 +8,7 @@ const router = express.Router();
  * /login:
  *   post:
  *     tags:
- *       - customer
+ *       - Customer
  *     summary: Customer login
  *     description: Customer authentication using username and password.
  *     requestBody:

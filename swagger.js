@@ -13,6 +13,10 @@ const swaggerDefinition = {
             url: 'http://localhost:3000',
             description: 'Lokalni server',
         },
+        {
+            url: 'https://comics-hub.onrender.com',
+            description: 'Dev Test',
+        },
     ],
     components: {
         securitySchemes: {

@@ -1,6 +1,7 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from '../swagger.js';
+import cors from 'cors';
 
 import indexRouter from './routes/index.js';
 import comicsRouter from './routes/comics.js';
@@ -19,6 +20,14 @@ const app = express();
 app.use(express.json());
 // Swagger UI ruta
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://comics-hub.onrender.com'],
+  // privremeno dozvoljeno za sve
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 
 
 // Rute
