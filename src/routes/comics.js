@@ -9,6 +9,8 @@ const router = express.Router();
  * /:
  *   get:
  *     summary: Fetch a list of all comics
+ *     tags:
+ *       - Comics
  *     description: Returns a list of comics with their details, including title, description, creation date, status type, and poster image URL.
  *     responses:
  *       200:
@@ -35,6 +37,45 @@ const router = express.Router();
  */
 
 router.get('/', fetchAllComics);
+
+/**
+ * @swagger
+ * /comics/{comicID}:
+ *   get:
+ *     summary: Get all chapters for a specific comic
+ *     tags:
+ *       - Comics
+ *     description: Fetches all chapters for a specific comic by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: comicID
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID stripa
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Uspesan odgovor
+ *         content:
+ *           application/json:
+ *             example:
+ *               chapters:
+ *                 - chapter_id: 1
+ *                   comic_id: 1
+ *                   title: "Best of Donatello"
+ *                   description: "This next in a series TMNT reprints that showcase the best stories of your favorite TMNT characters! Featuring tales from different publishers, this issue showcases the ever-intelligent Donatello! At almost 100 pages, this story has all the brainiac mutant Turtle you could ask for!"
+ *                   chapter_number: 1
+ *                   storage_id: 1
+ *                   poster_image_url: "https://jsarskkgglszznuemyhc.supabase.co/storage/v1/object/public/comic-pages/tmnt/chapter_1/01.jpg"
+ *                   author:
+ *                     name: "Brahm Revel"
+ *                     author_id: 2
+ *               total: 1
+ *               currentPage: 1
+ *               totalPages: 1
+ */
 router.get('/:comicID', authenticate, fetchChaptersByComicID);
 
 export default router;
