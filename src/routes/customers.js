@@ -100,7 +100,90 @@ router.post('/create', createNewCustomer);
  *                   example: 2023-10-01T12:00:00Z
  */
 router.get('/:customerID', fetchCustomerByCustomerID);
+
+/**
+ * @swagger
+ * /customers/save-progress:
+ *   post:
+ *     tags:
+ *       - Customer
+ *     summary: Save chapter progress
+ *     description: Saves the reading progress of a customer for a specific chapter.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - customerID
+ *               - chapterID
+ *               - progress
+ *             properties:
+ *               customerID:
+ *                 type: string
+ *                 description: The ID of the customer.
+ *                 example: 12345
+ *               chapterID:
+ *                 type: string
+ *                 description: The ID of the chapter.
+ *                 example: 67890
+ *               progress:
+ *                 type: number
+ *                 description: The progress percentage of the chapter.
+ *                 example: 75
+ *     responses:
+ *       200:
+ *         description: Progress successfully saved
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Progress saved successfully.
+ */
 router.post('/save-progress', saveChapterProgress);
+
+/**
+ * @swagger
+ * /customers/add-favourite:
+ *   post:
+ *     tags:
+ *       - Customer
+ *     summary: Add chapter to favourites
+ *     description: Adds a specific chapter to the customer's list of favourite chapters.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - customerID
+ *               - chapterID
+ *             properties:
+ *               customerID:
+ *                 type: string
+ *                 description: The ID of the customer.
+ *                 example: 12345
+ *               chapterID:
+ *                 type: string
+ *                 description: The ID of the chapter to be added to favourites.
+ *                 example: 67890
+ *     responses:
+ *       200:
+ *         description: Chapter successfully added to favourites
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Chapter added to favourites successfully.
+ */
 router.post('/add-favourite', addChapterToFavourite);
 
 
